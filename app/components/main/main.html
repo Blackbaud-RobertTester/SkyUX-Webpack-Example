@@ -1,0 +1,199 @@
+<header>
+    <h1>{{mainCtrl.applicationName}}</h1>
+</header>
+<section>
+    <h1>
+        Test Navigation
+    </h1>
+    <bb-navbar class="bb-navbar-showmobile">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="bb-navbar-active"><a href="">Selected item</a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" role="button">Child items <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+
+                        <li>
+                            <a href="">Child item 1</a>
+                        </li>
+
+                        <li>
+                            <a href="">Child item 2</a>
+                        </li>
+
+                        <li>
+                            <a href="">Child item 3</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="">Right item</a></li>
+            </ul>
+        </div>
+    </bb-navbar>
+</section>
+<section>
+    <h1>
+        Test Date Pickers
+    </h1>
+    <div>
+        <form name="mainCtrl.testform" novalidate>
+
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <label>Date field</label>
+                    <bb-datepicker bb-datepicker-min="mainCtrl.minDate" bb-datepicker-max="mainCtrl.maxDate" bb-datepicker-name="date2" ng-model="mainCtrl.date2" bb-datepicker-placeholder="mainCtrl.placeholder"></bb-datepicker>
+                    <label class="error" ng-show="mainCtrl.testform.date2.$error.dateFormat">{{mainCtrl.testform.date2.invalidFormatMessage}}</label>
+                    <label class="error" ng-show="mainCtrl.testform.date2.$error.minDate">Date is prior to minimum date range</label>
+                    <label class="error" ng-show="mainCtrl.testform.date2.$error.maxDate">Date is after maximum date range</label>
+                    <label class="error" ng-show="mainCtrl.testform.date2.$error.required && mainCtrl.testform.date2.$touched">Date is required</label>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <label>Date value</label>
+                    <div>{{mainCtrl.date2}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <button class="btn btn-primary"  style="margin-top: 5px; margin-bottom: 5px;" type="button" ng-click="mainCtrl.setDate()">Set date</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <label>Date field - custom formatting</label>
+                    <bb-datepicker bb-datepicker-name="date1" ng-required="true" ng-model="mainCtrl.date1" bb-datepicker-custom-validation="mainCtrl.customFormat"></bb-datepicker>
+                    <label class="error" ng-show="mainCtrl.testform.date1.$error.dateFormat && mainCtrl.testform.date1.$touched">{{mainCtrl.testform.date1.invalidFormatMessage}}</label>
+                    <label class="error" ng-show="mainCtrl.testform.date1.$error.required && mainCtrl.testform.date1.$touched">Date is required</label>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <label>Date value</label>
+                    <div>{{mainCtrl.date1}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md6 col-xs-12">
+                    <button class="btn btn-primary" style="margin-top: 5px; margin-bottom: 5px;" type="button" ng-click="mainCtrl.openModal()">Open date picker modal</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/ng-template" id="demo/datepicker/datepickermodal.html">
+        <bb-modal>
+            <div class="modal-form">
+                <bb-modal-header >Date picker modal</bb-modal-header>
+                <div bb-modal-body>
+                    <form name="dateModalCtrl.datepickerModal" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <label>Date field</label>
+                                <bb-datepicker bb-datepicker-name="date2" ng-model="dateModalCtrl.date" ng-required="true" bb-date-format="'dd/MM/yyyy'" bb-datepicker-append-to-body="true"></bb-datepicker>
+                                <label class="error" ng-show="dateModalCtrl.datepickerModal.date2.$error.dateFormat">{{dateModalCtrl.datepickerModal.date2.invalidFormatMessage}}</label>
+                                <label class="error" ng-show="dateModalCtrl.datepickerModal.date2.$error.required && dateModalCtrl.datepickerModal.date2.$touched">Date is required</label>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <label>Date value</label>
+                                <div>{{dateModalCtrl.date}}</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <bb-modal-footer>
+                    <bb-modal-footer-button-primary ng-disabled="dateModalCtrl.datepickerModal.$invalid"></bb-modal-footer-button-primary>
+                    <bb-modal-footer-button>Sample button</bb-modal-footer-button>
+                    <bb-modal-footer-button-cancel></bb-modal-footer-button-cancel>
+                </bb-modal-footer>
+            </div>
+        </bb-modal>
+    </script>
+</section>
+
+<section>
+    <h1>
+        Test Checklist
+    </h1>
+    <div ng-controller="ChecklistTestController as checklistCtrl">
+        <h3>List example</h3>
+        <bb-checklist
+            bb-checklist-items="checklistCtrl.listItems"
+            bb-checklist-selected-items="checklistCtrl.selectedListItems"
+            bb-checklist-include-search="checklistCtrl.includeSearch"
+            bb-checklist-search-placeholder="Search for columns"
+            bb-checklist-no-items-message="No columns found"
+            bb-checklist-categories="['Constituent', 'Giving', 'Miscellaneous']"
+            bb-checklist-mode="list"
+            bb-checklist-subset-label="'Hide inactive'"
+            bb-checklist-subset-property="inactive"
+            bb-checklist-subset-exclude
+            bb-checklist-only-selected
+            bb-checklist-filter-local>
+        </bb-checklist>
+        <p></p>
+        <label>
+            <input bb-check type="checkbox" ng-model="checklistCtrl.includeSearch" /> Include search text box
+        </label>
+        <p></p>
+        <hr>
+        <p></p>
+        <div>
+            <label>Selected items:</label>
+            <ul>
+                <li ng-repeat="item in checklistCtrl.selectedListItems">{{item.title}}</li>
+            </ul>
+        </div>
+        <h3>Single select example</h3>
+        <bb-checklist
+            bb-checklist-items="checklistCtrl.listItemsSingle"
+            bb-checklist-selected-items="checklistCtrl.selectedSingleItem"
+            bb-checklist-include-search="checklistCtrl.includeSearch"
+            bb-checklist-search-placeholder="Search for columns"
+            bb-checklist-no-items-message="No columns found"
+            bb-checklist-categories="['Constituent', 'Giving', 'Miscellaneous']"
+            bb-checklist-mode="list"
+            bb-checklist-select-style="single"
+            bb-checklist-subset-label="'Show inactive'"
+            bb-checklist-subset-property="inactive"
+            bb-checklist-filter-local>
+        </bb-checklist>
+        <p></p>
+        <hr>
+        <p></p>
+        <div>
+            <label>Selected item:</label>
+            <ul>
+                <li ng-repeat="item in checklistCtrl.selectedSingleItem">{{item.title}}</li>
+            </ul>
+        </div>
+        <h3>Grid example</h3>
+        <bb-checklist
+            bb-checklist-items="checklistCtrl.items"
+            bb-checklist-selected-items="checklistCtrl.selectedItems"
+            bb-checklist-filter-callback="checklistCtrl.onSearch"
+            bb-checklist-include-search="checklistCtrl.includeSearch"
+            bb-checklist-search-placeholder="Search for columns"
+            bb-checklist-no-items-message="'No columns found'">
+            <bb-checklist-columns>
+                <bb-checklist-column
+                    bb-checklist-column-caption="'Column Name'"
+                    bb-checklist-column-field="'column'"
+                    bb-checklist-column-width="'30%'">
+                </bb-checklist-column>
+                <bb-checklist-column
+                    bb-checklist-column-caption="'Column Description'"
+                    bb-checklist-column-field="'description'"
+                    bb-checklist-column-width="'70%'">
+                </bb-checklist-column>
+            </bb-checklist-columns>
+        </bb-checklist>
+        <br>
+        <div>
+            <label>Selected items:</label>
+            <ul>
+                <li ng-repeat="item in checklistCtrl.selectedItems">{{item.column}}</li>
+            </ul>
+        </div>
+    </div>
+</section>
