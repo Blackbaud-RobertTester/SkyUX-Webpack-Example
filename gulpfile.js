@@ -10,17 +10,23 @@ var rm = require('gulp-rimraf');
 var KarmaServer = require('karma').Server;
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
-var webpackConfig = require("./webpack.prod.config.js");
 var minimist = require('minimist');
 
 var knownOptions = {
-  string: 'buildNumber',
-  default: { buildNumber: 'LOCAL' }
+  string: [
+    'buildNumber',
+    'webpackConfig'
+  ],
+  default: {
+    buildNumber: 'LOCAL',
+    webpackConfig: './webpack.config.js'
+  }
 };
 
 var options = minimist(process.argv.slice(2), knownOptions);
 
-var versionMajorMinor = fs.readFileSync(__dirname + '/VERSION');
+var webpackConfig = require(options.webpackConfig)
+var versionMajorMinor = fs.readFileSync(__dirname + '/VERSION');;
 var gitHash = '';
 
 gulp.task("webpack-dev-server", function(callback) {
