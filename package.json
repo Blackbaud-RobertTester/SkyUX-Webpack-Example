@@ -2,7 +2,8 @@
   "name": "sky-webpack",
   "version": "0.0.0",
   "dependencies": {
-    "blackbaud-skyux": "git@github.com:Blackbaud-RobertTester/skyux.git#skyux-webpack"
+    "blackbaud-skyux": "git@github.com:Blackbaud-RobertTester/skyux.git#skyux-webpack",
+    "scriptjs": "^2.5.8"
   },
   "devDependencies": {
     "angular-mocks": "1.5.3",
@@ -26,6 +27,7 @@
     "gulp-rimraf": "^0.2.0",
     "gulp-util": "^3.0.7",
     "html-loader": "^0.3.0",
+    "html-webpack-plugin": "^2.21.0",
     "isparta-loader": "^2.0.0",
     "jasmine": "^2.3.2",
     "jasmine-core": "^2.3.4",
